@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:medtrain/home.dart';
 import 'package:medtrain/splash_screen.dart';
 
+import 'onboard/onboard.dart';
+
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Splash(),
+      home: OnBoard(),
     );
   }
 }
