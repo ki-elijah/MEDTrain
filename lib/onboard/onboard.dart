@@ -1,24 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medtrain/home.dart';
+import 'package:medtrain/splash_screen.dart';
+import '../constant.dart';
 import 'onboard_model.dart';
 
 class OnBoard extends StatefulWidget {
+  const OnBoard({Key? key}) : super(key: key);
+
   @override
   _OnBoardState createState() => _OnBoardState();
 }
 
 class _OnBoardState extends State<OnBoard> {
+  int currentIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: currentIndex % 2 == 0 ? kwhite: kblue,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: currentIndex % 2 == 0 ? kwhite: kblue,
         elevation: 0,
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text("Skip"),
+            child: Text("Skip",
+              style: TextStyle(
+                color:currentIndex % 2 == 0 ? kblack: kwhite,
+              ),
+            ),
           ),
         ],
       ),
@@ -26,9 +50,17 @@ class _OnBoardState extends State<OnBoard> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: PageView.builder(
             itemCount: screens.length,
-            physics: NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (int index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
             itemBuilder: (context, index) {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(screens[index].img),
                   Container(
@@ -42,12 +74,13 @@ class _OnBoardState extends State<OnBoard> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                margin: EdgeInsets.symmetric(horizontal: 3.0),
-                                width: 8.0,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 3.0),
+                                width: currentIndex == index ? 25.0 : 8.0,
                                 height: 8.0,
                                 decoration: BoxDecoration(
-                                  color: Colors.brown,
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: currentIndex % 2 == 0 ? kbrown: kbrown300,
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
                             ],
@@ -57,7 +90,7 @@ class _OnBoardState extends State<OnBoard> {
                   Text(
                     screens[index].text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 27.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -66,25 +99,37 @@ class _OnBoardState extends State<OnBoard> {
                   Text(
                     screens[index].desc,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14.0, color: Colors.black54),
+                    style:
+                        const TextStyle(fontSize: 16.0, color: Colors.black54),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      if (index == screens.length - 1) {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => const Home()));
+                      }
+                      _pageController.nextPage(
+                        duration: const Duration(microseconds: 300),
+                        curve: Curves.bounceIn,
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 10.0),
                       decoration: BoxDecoration(
                         color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
+                        children: const [
                           Text("Next",
                               style: TextStyle(
                                 fontSize: 16.0,
                                 color: Colors.white,
                               )),
+                          SizedBox(width: 15.0),
+                          Icon(Icons.arrow_forward_sharp, color: Colors.white),
                         ],
                       ),
                     ),

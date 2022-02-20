@@ -19,21 +19,21 @@ class OnBoardModel{
 List<OnBoardModel> screens = <OnBoardModel>[
   OnBoardModel(
     img: 'assets/images/img-1.png',
-    text: 'Medical Equipment Training Software',
+    text: 'Training',
     desc: 'blah, blah blah blah, blah blah blah blah',
     bg: Colors.white,
     button: Color(0xFF006FDB),
   ),
   OnBoardModel(
     img: 'assets/images/img-2.png',
-    text: 'Medical Equipment Training Software',
+    text: 'Chat',
     desc: 'blah, blah blah blah, blah blah blah blah',
     bg: Colors.white,
     button: Color(0xFF006FDB),
   ),
   OnBoardModel(
     img: 'assets/images/img-3.png',
-    text: 'Medical Equipment Training Software',
+    text: 'Learn',
     desc: 'blah, blah blah blah, blah blah blah blah',
     bg: Colors.white,
     button: Color(0xFF006FDB),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medtrain/onboard/onboard.dart';
 import 'home.dart';
 import 'main.dart';
 
@@ -17,9 +18,9 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 5),
+        const Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home())));
+            context, MaterialPageRoute(builder: (context) => const OnBoard())));
   }
 
   @override
@@ -28,7 +29,7 @@ class _SplashState extends State<Splash> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
@@ -49,7 +50,7 @@ class _SplashState extends State<Splash> {
                   height: 300.0,
                   width: 300.0,
                 ),
-                Text(
+                const Text(
                   "A medical Training Service Software",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -60,7 +61,7 @@ class _SplashState extends State<Splash> {
                 ),
               ],
             ),
-            CircularProgressIndicator(),
+            const CircularProgressIndicator(),
           ],
         ),
       ),
