@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medtrain/onboard/onboard.dart';
 import 'home.dart';
 import 'main.dart';
 
@@ -20,7 +19,7 @@ class _SplashState extends State<Splash> {
     Timer(
         const Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const OnBoard())));
+            context, MaterialPageRoute(builder: (context) => const Home())));
   }
 
   @override

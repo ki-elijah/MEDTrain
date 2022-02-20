@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medtrain/home.dart';
 import 'package:medtrain/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constant.dart';
 import 'onboard_model.dart';
 
@@ -28,19 +29,30 @@ class _OnBoardState extends State<OnBoard> {
     super.dispose();
   }
 
+  _storeOnBoardInfo() async {
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: currentIndex % 2 == 0 ? kwhite: kblue,
+      backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
       appBar: AppBar(
-        backgroundColor: currentIndex % 2 == 0 ? kwhite: kblue,
+        backgroundColor: currentIndex % 2 == 0 ? kwhite : kblue,
         elevation: 0,
         actions: [
           TextButton(
-            onPressed: () {},
-            child: Text("Skip",
+            onPressed: () async {
+              await _storeOnBoardInfo();
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Splash()));
+            },
+            child: Text(
+              "Skip",
               style: TextStyle(
-                color:currentIndex % 2 == 0 ? kblack: kwhite,
+                color: currentIndex % 2 == 0 ? kblack : kwhite,
               ),
             ),
           ),
@@ -79,7 +91,9 @@ class _OnBoardState extends State<OnBoard> {
                                 width: currentIndex == index ? 25.0 : 8.0,
                                 height: 8.0,
                                 decoration: BoxDecoration(
-                                  color: currentIndex % 2 == 0 ? kbrown: kbrown300,
+                                  color: currentIndex % 2 == 0
+                                      ? kbrown
+                                      : kbrown300,
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
@@ -90,46 +104,51 @@ class _OnBoardState extends State<OnBoard> {
                   Text(
                     screens[index].text,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 27.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: currentIndex % 2 == 0 ? kblack : kwhite,
                     ),
                   ),
                   Text(
                     screens[index].desc,
                     textAlign: TextAlign.center,
-                    style:
-                        const TextStyle(fontSize: 16.0, color: Colors.black54),
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        color: currentIndex % 2 == 0 ? kblack : kwhite),
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (index == screens.length - 1) {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => const Home()));
+                        await _storeOnBoardInfo();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Splash()));
                       }
                       _pageController.nextPage(
                         duration: const Duration(microseconds: 300),
-                        curve: Curves.bounceIn,
+                        curve: Curves.easeInBack,
                       );
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 10.0),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: currentIndex % 2 == 0 ? kblue : kwhite,
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           Text("Next",
                               style: TextStyle(
                                 fontSize: 16.0,
-                                color: Colors.white,
+                                color: currentIndex % 2 == 0 ? kwhite : kblue,
                               )),
-                          SizedBox(width: 15.0),
-                          Icon(Icons.arrow_forward_sharp, color: Colors.white),
+                          const SizedBox(width: 15.0),
+                          Icon(Icons.arrow_forward_sharp,
+                              color: currentIndex % 2 == 0 ? kwhite : kblue),
                         ],
                       ),
                     ),

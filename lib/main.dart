@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medtrain/home.dart';
 import 'package:medtrain/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'onboard/onboard.dart';
 
-void main() {
+int? isViewed;
+
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  isViewed = prefs.getInt('onBoard');
   runApp(const MyApp());
 }
 
@@ -22,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Splash(),
+      home: isViewed !=0 ? const OnBoard() : Splash(),
     );
   }
 }
