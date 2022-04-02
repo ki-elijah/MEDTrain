@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "825821060",
+    "project_id": "medtrain-e6fac",
+    "storage_bucket": "medtrain-e6fac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825821060:android:f696a0b630d291f4fe3fd1",
+        "android_client_info": {
+          "package_name": "com.example.medtrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825821060-61o5t6aceuh3vgkenbvv7fo0pehanu1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp9S9MX795sO9VZ2VVX1rBcw-8W6xC8Zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825821060-61o5t6aceuh3vgkenbvv7fo0pehanu1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
