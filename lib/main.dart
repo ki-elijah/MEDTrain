@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medtrain/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'onboard/onboard.dart';
 
 int? isViewed;
