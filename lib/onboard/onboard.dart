@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medtrain/page/home.dart';
+import  'package:medtrain/page/home.dart';
 import 'package:medtrain/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constant.dart';

@@ -12,7 +12,7 @@ class _EventsPageState extends State<Chat> {
   Widget build(BuildContext context) {
     return Container(
       child: const Center(
-        child: Text("Events Page"),
+        child: Text("Coming Soon!!!"),
       ),
     );
   }
